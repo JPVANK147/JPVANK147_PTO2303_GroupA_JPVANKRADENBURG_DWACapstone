@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
     return (
         <header className="header">
-            <img className="header-image" src={require("../images/podcast.png")} />
+            <img className="header-image" alt="podcast" src={require("../images/podcast.png")} />
             <h3 className="header-title" >Podcast</h3>
         </header>
     )

@@ -1,5 +1,4 @@
 import React from "react"
-import ReactDOM from "react-dom"
 import Header from "./components/header";
 import Preview from "./components/preview";
 import "./style.css"
