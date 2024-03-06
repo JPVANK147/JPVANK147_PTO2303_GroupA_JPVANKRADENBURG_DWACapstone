@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    height: 55px;
+    background: linear-gradient(90deg, #d3d2d3 1.18%, #434246 100%);
+    color:black;
+    padding: 20px;
+    
+}
+
+.header-image {
+    height: 75%;
+    margin-right: 6px;
+}
+
+.header-title {
+    font-size: 2.1rem;
+    margin-right: auto;
+}
