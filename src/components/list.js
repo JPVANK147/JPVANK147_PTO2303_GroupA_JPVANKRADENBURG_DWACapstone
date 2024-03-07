@@ -9,6 +9,7 @@ const Preview = {
 }
 */
 function List() {
+
     const [showData, setshowData] = React.useState({})
 
     React.useEffect(() => {
@@ -35,7 +36,7 @@ function List() {
     */
     const updateDate = () => {
         return new Date().toISOString().split('T')[0];
-    }
+    };
 
     return (
         <div className="list-border">
@@ -51,3 +52,31 @@ function List() {
 }
 
 export default List
+
+/*
+import React from "react";
+
+function List({ showData }) {
+    const updateDate = () => {
+        return new Date().toISOString().split('T')[0];
+    };
+
+    return (
+        <div>
+            {showData.map((dataItem, index) => (
+                <div key={index} className="list-border">
+                    <img className="list-image" src={dataItem.image} alt="list" />
+                    <div className="info">
+                        <h3>Title: {dataItem.title}</h3>
+                        <p>Description: {dataItem.description}</p>
+                        <h3>Seasons: {dataItem.seasons}</h3>
+                        <h3>Update: {updateDate(dataItem.updated)}</h3>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+export default List;
+*/
