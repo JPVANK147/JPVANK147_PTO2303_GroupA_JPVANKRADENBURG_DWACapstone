@@ -7,9 +7,9 @@ body {
     align-items: center;
     height: 55px;
     background: linear-gradient(90deg, #d3d2d3 1.18%, #434246 100%);
-    color:black;
+    color: black;
     padding: 20px;
-    
+
 }
 
 .header-image {
@@ -20,4 +20,23 @@ body {
 .header-title {
     font-size: 2.1rem;
     margin-right: auto;
+}
+
+.list-border {
+    margin: 1rem;
+    box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.5);
+    border: 2px;
+    display: flex;
+    align-items: center;
+
+}
+
+.list-image {
+    margin: 10px;
+    width: 10rem;
+    height: 10rem;
+}
+
+.info {
+    flex-grow: 1;
 }

@@ -1,13 +1,13 @@
 import React from "react"
 import Header from "./components/header";
-import Preview from "./components/preview";
+import List from "./components/list";
 import "./style.css"
 
 function App() {
   return (
       <div>
           <Header />
-          <Preview />
+          <List />
       </div>
   )
 }
