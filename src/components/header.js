@@ -4,7 +4,7 @@ function Header() {
     return (
         <header className="header">
             <img className="header-image" alt="podcast" src={require("../images/podcast.png")} />
-            <h3 className="header-title" >Podcast</h3>
+            <h3 className="header-title">Podcast</h3>
         </header>
     )
 }
