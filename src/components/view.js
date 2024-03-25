@@ -125,7 +125,7 @@ function View() {
                             <audio className="view-audio" src={episode.file} controls />
                             <Box sx={{ margin: "20px"}}>
                                 <Button className="view-favourite-button" variant="contained" color="secondary" onClick={() => handleAddToFavourites(episode)} >
-                                    Add to Favourites
+                                    Add to Favouritess
                                 </Button>
                             </Box>
 
