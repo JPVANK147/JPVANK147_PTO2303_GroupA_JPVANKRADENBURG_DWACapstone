@@ -7,7 +7,6 @@ import { InputLabel } from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 
-
 function View() {
     const [viewData, setViewData] = useState({});
     const [selectedSeason, setSelectedSeason] = useState("");
@@ -125,7 +124,7 @@ function View() {
                             <audio className="view-audio" src={episode.file} controls />
                             <Box sx={{ margin: "20px"}}>
                                 <Button className="view-favourite-button" variant="contained" color="secondary" onClick={() => handleAddToFavourites(episode)} >
-                                    Add to Favouritess
+                                    Add to Favourites
                                 </Button>
                             </Box>
 
@@ -138,4 +137,3 @@ function View() {
 }
 
 export default View;
-

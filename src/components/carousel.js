@@ -53,7 +53,6 @@ const Carousel = ({ interval = 6000 }) => {
         );
     }, [images]);
 
-
     useEffect(() => {
         const autoPlayInterval = setInterval(nextSlide, interval);
         return () => {
