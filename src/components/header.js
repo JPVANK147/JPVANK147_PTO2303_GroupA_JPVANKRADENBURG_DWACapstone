@@ -1,14 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import Button from '@mui/material/Button';
 
 function Header() {
+    const navigate = useNavigate();
+    
+    const handelFavouritesPage = () => {
+        navigate("/favourite")
+    };
+
     return (
         <header className="header">
-            <img className="header-image" alt="podcast" src={require("../images/podcast.png")} />
-            <h3 className="header-title">Podcast</h3>
+            <img className="header-image" alt="podcast" src={require("../images/podcast-audio.png")} />
+            <h3 className="header-title">PODCAST</h3>
+            <Button onClick={handelFavouritesPage} variant="contained" color="secondary">
+                Favourites
+            </Button>
         </header>
-    )
-}
+    );
+};
 
-export default Header
-
-//"https://cdn-icons-mp4.flaticon.com/512/8720/8720265.mp4"
+export default Header;
