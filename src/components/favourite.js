@@ -8,31 +8,41 @@ import { InputLabel } from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 
+// A Function of the Favourite component
 function Favourite() {
     const navigate = useNavigate();
     const [favourites, setFavourites] = useState([]);
 
+    // Fetch stored favourites from local storage
     useEffect(() => {
         const storedFavourites = JSON.parse(localStorage.getItem('favourites')) || [];
         setFavourites(storedFavourites);
     }, []);
 
+    // Function to navigate back to home page
     const handleGoBackToHomeClick = () => {
         navigate("/")
     };
 
+    // Function to handle sorting favourites
     const handleSortingFavouriteChange = (event) => {
         const selectedSortOption = event.target.value;
         const sortedFavourites = sortFavourites([...favourites], selectedSortOption);
         setFavourites(sortedFavourites);
     };
 
+    // Function to handle searching for favourite titles
     const handleSearchFavouriteTitleChange = (event) => {
+
+        // Get the search query from the input field and convert it to lowercase
         const search = event.target.value.toLowerCase();
+
+        // If the search query is empty, reset favourites to the stored favourites in local storage
         if (search === "") {
             const storedFavourites = JSON.parse(localStorage.getItem('favourites')) || [];
             setFavourites(storedFavourites);
         } else {
+            // If the search query is not empty, filter favourites based on whether the title or any episode title contains the search query
             const filteredFavourites = favourites.filter((favourite) =>
                 favourite.title.toLowerCase().includes(search) ||
                 favourite.seasons.some((season) =>
@@ -41,30 +51,43 @@ function Favourite() {
                     )
                 )
             );
+            // Update the favourites with the filtered results
             setFavourites(filteredFavourites);
         }
     };
 
+    // Function to handle unfavouriting an episode
     const handleUnfavouriteClick = (favouriteIndex, seasonIndex, episodeIndex) => {
+        // Create a copy of the favourites array
         const updatedFavourites = [...favourites];
+
+        // Get the favourite object based on the index
         const favourite = updatedFavourites[favouriteIndex];
+
+        // Get the season object from the favourite
         const season = favourite.seasons[seasonIndex];
 
-        
+        // Remove the episode from the season
         season.episodes.splice(episodeIndex, 1);
 
+        // If the season has no more episodes, remove the season from the favourite
         if (season.episodes.length === 0) {
             favourite.seasons.splice(seasonIndex, 1);
         };
 
+        // If the favourite has no more seasons, remove the favourite from the updatedFavourites array
         if (favourite.seasons.length === 0) {
             updatedFavourites.splice(favouriteIndex, 1);
         };
 
+        // Update the state with the updated favourites array
         setFavourites(updatedFavourites);
+
+        // Update the local storage with the updated favourites array
         localStorage.setItem('favourites', JSON.stringify(updatedFavourites));
     };
 
+    // Function to format current date
     const formattedDate = () => {
         const currentDate = new Date();
         const day = currentDate.getDate();
@@ -88,6 +111,7 @@ function Favourite() {
         return `${day} ${month} ${year}`
     };
 
+    // Function to sort favourites based on selected option
     const sortFavourites = (data, sortBy) => {
         switch (sortBy) {
             case "From A to Z":
@@ -103,6 +127,7 @@ function Favourite() {
         }
     };
 
+    // Rendering the Favourite component
     return (
         <div>
             <div className="favourite-container-page">

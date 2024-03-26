@@ -2,9 +2,13 @@ import React from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
+// Function component named AudioPlayer which takes props as input
 function AudioPlayer({ isOpen, onClose, viewData, episode }) {
+    
+    // If isOpen prop is false, return null meaning don't render anything
     if (!isOpen) return null;
 
+    // If isOpen is true, render the following
     return (
         <div className="overlay">
             <div className="overlay__background" />
@@ -27,5 +31,5 @@ function AudioPlayer({ isOpen, onClose, viewData, episode }) {
     );
 }
 
+// Exporting the AudioPlayer component to be used elsewhere
 export default AudioPlayer;
-

@@ -8,15 +8,30 @@ import { InputLabel } from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 
+// A Function for the View component
 function View() {
+    // A State for view data
     const [viewData, setViewData] = useState({});
+
+    // A State for selected season
     const [selectedSeason, setSelectedSeason] = useState("");
+
+    // A State for loading status
     const [loading, setLoading] = useState(true);
+
+    // A State for selected episode
     const [selectedEpisode, setSelectedEpisode] = useState(null);
+
+    // A State for overlay open/close
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
+    // Hook for navigation
     const navigate = useNavigate();
+
+    // Extracting id parameter from URL
     const { id } = useParams();
 
+    // Fetch show data from API based on id on component mount
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -37,19 +52,25 @@ function View() {
 
     }, [id]);
 
+    // Function to navigate back to home page
     const handleBackButtonClick = () => {
         navigate("/");
     };
 
+    // Event handler for season change
     const handleSeasonChange = (event) => {
         setSelectedSeason(event.target.value);
     };
 
+    // Function to add an episode to the favourites page
     const handleAddToFavourites = (episode) => {
+        // Get the favourites from local storage or initialize as empty array
         const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
 
+        // Find the index of the series in favourites
         let seriesIndex = favourites.findIndex(favourite => favourite.title === viewData.title);
 
+        // If series not found in favourites, add it
         if (seriesIndex === -1) {
             favourites.push({
                 title: viewData.title,
@@ -60,28 +81,35 @@ function View() {
                 }]
             });
         } else {
+            // Find index of the season in series
             let seasonIndex = favourites[seriesIndex].seasons.findIndex(season => season.title === selectedSeason);
 
+            // If season not found in series, add it
             if (seasonIndex === -1) {
                 favourites[seriesIndex].seasons.push({
                     title: selectedSeason,
                     episodes: [episode]
                 });
             } else {
+                // Add episode to existing season
                 favourites[seriesIndex].seasons[seasonIndex].episodes.push(episode);
             }
         }
 
+        // Save favourites to local storage
         localStorage.setItem('favourites', JSON.stringify(favourites));
     };
 
+    // Event handler for clicking on audio player button
     const handleAudioPlayerClickButton = (episode) => {
         setSelectedEpisode(episode);
         setIsOverlayOpen(true);
     };
 
+    // If the data is still loading, show loading message
     if (loading) return <h1>Loading...</h1>;
 
+    // Rendering the View component
     return (
         <div className="view-border">
             <Button className="view-back-button" variant="contained" color="secondary" onClick={handleBackButtonClick}>
@@ -148,4 +176,5 @@ function View() {
     );
 }
 
+// Exporting the View component to be used elsewhere
 export default View;

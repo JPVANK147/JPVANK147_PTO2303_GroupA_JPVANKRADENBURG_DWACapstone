@@ -6,8 +6,12 @@ import View from './components/view';
 import Favourite from './components/favourite';
 import "./style.css";
 
+// Function for the App component
 function App() {
+
+    // Rendering the App component
     return (
+        // Router component to enable routing
         <Router>
             <div>
                 <Header />
@@ -23,4 +27,5 @@ function App() {
     );
 }
 
+// Exporting the App component to be used elsewhere
 export default App;

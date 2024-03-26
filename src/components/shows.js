@@ -9,6 +9,7 @@ import { InputLabel } from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 
+// Mapping of genre IDs to their names
 const GenreMapping = {
     0: "All",
     1: "Personal Growth",
@@ -22,13 +23,24 @@ const GenreMapping = {
     9: "Kids and Family"
 };
 
+// A Function for the Shows component
 function Shows() {
+    // A State for the search title
     const [searchTitle, setSearchTitle] = useState("");
+
+    // A State for the search genre
     const [searchGenre, setSearchGenre] = useState("");
+
+    // A State for the sorting option
     const [sortingOption, setSortingOption] = useState("");
+
+    // A State for the show data
     const [showsData, setShowData] = useState([]);
+
+    // Hook for navigation
     const navigate = useNavigate();
 
+    // Fetch the show data from API onto a component mount
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -44,23 +56,28 @@ function Shows() {
 
     }, []);
 
+    // Filter shows based on search title and genre
     const filteredData = showsData.filter(show =>
         show.title.toLowerCase().includes(searchTitle.toLowerCase()) &&
         (searchGenre === "" || show.genres.includes(parseInt(searchGenre)))
     );
 
+    // Event handler for search title change
     const handleSearchTitleChange = (event) => {
         setSearchTitle(event.target.value);
     };
 
+    // Event handler for search genre change
     const handleSearchGenreChange = (event) => {
         setSearchGenre(event.target.value);
     };
 
+    // Event handler for sorting change
     const handleSortingChange = (event) => {
         setSortingOption(event.target.value);
     };
 
+    // Function to sort shows based on sorting option
     const sortShows = (data, option) => {
         switch (option) {
             case "From A to Z":
@@ -76,6 +93,7 @@ function Shows() {
         }
     };
 
+    // Function to handle sorting of shows
     const handleShowSorting = () => {
         let sortedData = filteredData;
         if (sortingOption) {
@@ -84,22 +102,27 @@ function Shows() {
         return sortedData;
     };
 
-
+    // Event handler for clicking on a show to view the shows details
     const handleViewClick = (id) => {
         navigate(`/view/${id}`)
     };
 
+    // Rendering the list of shows
     const listOfShows = handleShowSorting().map((dataShow, index) => {
+        // Map genre IDs to their corresponding names
         const genreMap = dataShow.genres.map(genreId => GenreMapping[genreId]).join(', ');
 
+        // Function to format update date
         const updateDate = () => {
             return new Date(dataShow.updated).toISOString().split('T')[0];
         };
 
+        // Function to format update time
         const updateTime = () => {
             return new Date(dataShow.updated).toISOString().slice(11, 19);
         };
 
+        // Rendering each individual show
         return (
             <div key={index} className="show-grid-container">
                 <div className="show-border">
@@ -120,6 +143,7 @@ function Shows() {
         );
     });
 
+    // Rendering the Shows component
     return (
         <div>
             <Carousel />
@@ -178,23 +202,5 @@ function Shows() {
     );
 }
 
+// Exporting the Shows component to be used elsewhere
 export default Shows;
-
-/*
-<div className="grid-container">
-                <div key={index} className="show-border">
-                    <img className="show-image" src={dataShow.image} alt="show-img" />
-                    <div>
-                        <h3>Title: {dataShow.title}</h3>
-                        <h3>Description: {`${dataShow.description.substring(0, 250)}...`}</h3>
-                        <h3>Seasons: {dataShow.seasons}</h3>
-                        <h3>Genres: {genreMap}</h3>
-                        <h3>Updated: {updateDate(dataShow.updated)}</h3>
-                        <h3>Time: {updateTime(dataShow.updated)}</h3>
-                    </div>
-                    <Button className="show-view-button" variant="contained" color="secondary" onClick={() => handleViewClick(dataShow.id)}>
-                        View
-                    </Button>
-                </div>
-            </div>
-            */
