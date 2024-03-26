@@ -45,20 +45,20 @@ function Favourite() {
         }
     };
 
-    const handleUnfavouriteClick = (favoriteIndex, seasonIndex, episodeIndex) => {
+    const handleUnfavouriteClick = (favouriteIndex, seasonIndex, episodeIndex) => {
         const updatedFavourites = [...favourites];
-        const favorite = updatedFavourites[favoriteIndex];
-        const season = favorite.seasons[seasonIndex];
+        const favourite = updatedFavourites[favouriteIndex];
+        const season = favourite.seasons[seasonIndex];
 
         
         season.episodes.splice(episodeIndex, 1);
 
         if (season.episodes.length === 0) {
-            favorite.seasons.splice(seasonIndex, 1);
+            favourite.seasons.splice(seasonIndex, 1);
         };
 
-        if (favorite.seasons.length === 0) {
-            updatedFavourites.splice(favoriteIndex, 1);
+        if (favourite.seasons.length === 0) {
+            updatedFavourites.splice(favouriteIndex, 1);
         };
 
         setFavourites(updatedFavourites);

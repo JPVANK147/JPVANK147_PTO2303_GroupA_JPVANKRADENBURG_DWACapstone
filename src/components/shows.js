@@ -84,6 +84,7 @@ function Shows() {
         return sortedData;
     };
 
+
     const handleViewClick = (id) => {
         navigate(`/view/${id}`)
     };
@@ -100,25 +101,28 @@ function Shows() {
         };
 
         return (
-            <div key={index} className="show-border">
-                <img className="show-image" src={dataShow.image} alt="show-img" />
-                <div className="show-info">
-                    <h3>Title: {dataShow.title}</h3>
-                    <p>Description: {`${dataShow.description.substring(0, 250)}...`}</p>
-                    <h3>Seasons: {dataShow.seasons}</h3>
-                    <h3>Genres: {genreMap}</h3>
-                    <h3>Updated: {updateDate(dataShow.updated)}</h3>
-                    <h3>Time: {updateTime(dataShow.updated)}</h3>
+            <div key={index} className="show-grid-container">
+                <div className="show-border">
+                    <div>
+                        <img className="show-image" src={dataShow.image} alt="show-img" />
+                        <h3>Title: {dataShow.title}</h3>
+                        <h3>Description: {`${dataShow.description.substring(0, 75)}..`}</h3>
+                        <h3>Seasons: {dataShow.seasons}</h3>
+                        <h3>Genres: {genreMap}</h3>
+                        <h3>Updated: {updateDate(dataShow.updated)}</h3>
+                        <h3>Time: {updateTime(dataShow.updated)}</h3>
+                        <Button className="show-view-button" variant="contained" color="secondary" onClick={() => handleViewClick(dataShow.id)}>
+                            View
+                        </Button>
+                    </div>
                 </div>
-                <Button className="show-view-button" variant="contained" color="secondary" onClick={() => handleViewClick(dataShow.id)}>
-                    View
-                </Button>
             </div>
         );
     });
 
     return (
         <div>
+            <Carousel />
             <div className="search-show-container">
                 <div>
                     <TextField id="standard-basic" label="TITLE" variant="standard" color="secondary" onChange={handleSearchTitleChange} />
@@ -167,10 +171,30 @@ function Shows() {
                     </Box>
                 </div>
             </div>
-            <Carousel />
-            {listOfShows}
+            <div className="show-grid-wrapper">
+                {listOfShows}
+            </div>
         </div>
     );
 }
 
 export default Shows;
+
+/*
+<div className="grid-container">
+                <div key={index} className="show-border">
+                    <img className="show-image" src={dataShow.image} alt="show-img" />
+                    <div>
+                        <h3>Title: {dataShow.title}</h3>
+                        <h3>Description: {`${dataShow.description.substring(0, 250)}...`}</h3>
+                        <h3>Seasons: {dataShow.seasons}</h3>
+                        <h3>Genres: {genreMap}</h3>
+                        <h3>Updated: {updateDate(dataShow.updated)}</h3>
+                        <h3>Time: {updateTime(dataShow.updated)}</h3>
+                    </div>
+                    <Button className="show-view-button" variant="contained" color="secondary" onClick={() => handleViewClick(dataShow.id)}>
+                        View
+                    </Button>
+                </div>
+            </div>
+            */

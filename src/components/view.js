@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import AudioPlayer from "./audioplayer";
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -11,6 +12,8 @@ function View() {
     const [viewData, setViewData] = useState({});
     const [selectedSeason, setSelectedSeason] = useState("");
     const [loading, setLoading] = useState(true);
+    const [selectedEpisode, setSelectedEpisode] = useState(null);
+    const [isOverlayOpen, setIsOverlayOpen] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -31,7 +34,7 @@ function View() {
         };
 
         fetchData();
-        
+
     }, [id]);
 
     const handleBackButtonClick = () => {
@@ -45,7 +48,7 @@ function View() {
     const handleAddToFavourites = (episode) => {
         const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
 
-        let seriesIndex = favourites.findIndex(favorite => favorite.title === viewData.title);
+        let seriesIndex = favourites.findIndex(favourite => favourite.title === viewData.title);
 
         if (seriesIndex === -1) {
             favourites.push({
@@ -70,6 +73,11 @@ function View() {
         }
 
         localStorage.setItem('favourites', JSON.stringify(favourites));
+    };
+
+    const handleAudioPlayerClickButton = (episode) => {
+        setSelectedEpisode(episode);
+        setIsOverlayOpen(true);
     };
 
     if (loading) return <h1>Loading...</h1>;
@@ -113,25 +121,29 @@ function View() {
             </div>
             {selectedSeason && viewData.seasons && (
                 <div>
-                    {viewData.seasons.find(season => season.title === selectedSeason)?.episodes.map((episode, index) => (
-                        <div className="view-episode" >
+                    {viewData.seasons.find(season => season.title === selectedSeason)?.episodes.map((episode) => (
+                        <div className="view-episode">
                             <h3>Episode:</h3>
                             <h2>{episode.episode}</h2>
                             <h3>Title:</h3>
                             <h2>{episode.title}</h2>
                             <h3>Description:</h3>
                             <p>{episode.description}</p>
-                            <audio className="view-audio" src={episode.file} controls />
-                            <Box sx={{ margin: "20px"}}>
+                            <Box>
+                                <Button className="view-favourite-button" variant="contained" color="secondary" onClick={() => handleAudioPlayerClickButton(episode)}>
+                                    Audio
+                                </Button>
+                            </Box>
+                            <Box sx={{ margin: "15px" }}>
                                 <Button className="view-favourite-button" variant="contained" color="secondary" onClick={() => handleAddToFavourites(episode)} >
                                     Add to Favourites
                                 </Button>
                             </Box>
-
                         </div>
                     ))}
                 </div>
             )}
+            <AudioPlayer isOpen={isOverlayOpen} onClose={() => setIsOverlayOpen(false)} viewData={viewData} episode={selectedEpisode} />
         </div>
     );
 }
