@@ -265,3 +265,29 @@ input[type=range]::-moz-range-thumb {
     background: #65001C;
     cursor: pointer;
 }
+
+/*Loading*/
+
+
+.loader-ring {
+    position: fixed;
+    top: 50%;
+    left: 47.5%;
+    transform: translate(-50%, -50%);
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid rgb(123, 31, 162);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

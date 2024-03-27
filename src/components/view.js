@@ -107,7 +107,9 @@ function View() {
     };
 
     // If the data is still loading, show loading message
-    if (loading) return <h1>Loading...</h1>;
+    if (loading) return (
+        <div className="loader-ring"></div>
+    );
 
     // Rendering the View component
     return (

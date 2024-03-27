@@ -10,7 +10,9 @@ import Box from '@mui/material/Box';
 
 // A Function of the Favourite component
 function Favourite() {
+    // Hook for navigation
     const navigate = useNavigate();
+    // A State for the favourites
     const [favourites, setFavourites] = useState([]);
 
     // Fetch stored favourites from local storage

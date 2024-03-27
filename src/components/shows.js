@@ -25,6 +25,9 @@ const GenreMapping = {
 
 // A Function for the Shows component
 function Shows() {
+    // A State for loading status
+    const [loading, setLoading] = useState(true);
+
     // A State for the search title
     const [searchTitle, setSearchTitle] = useState("");
 
@@ -47,8 +50,10 @@ function Shows() {
                 const res = await fetch("https://podcast-api.netlify.app/shows");
                 const data = await res.json();
                 setShowData(data);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching show data:', error);
+                setLoading(false);
             }
         };
 
@@ -106,6 +111,11 @@ function Shows() {
     const handleViewClick = (id) => {
         navigate(`/view/${id}`)
     };
+
+    if (loading) return (
+        <div className="loader-ring"></div>
+    );
+
 
     // Rendering the list of shows
     const listOfShows = handleShowSorting().map((dataShow, index) => {
