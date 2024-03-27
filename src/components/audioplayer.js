@@ -96,10 +96,10 @@ function AudioPlayer({ isOpen, onClose, viewData, episode }) {
                     <h3>Title of Episode: {episode.title}</h3>
                     <div className="audio-player">
                         <audio ref={audioRef} src={episode.file} />
-                        <Button variant="contained" color="secondary" onClick={togglePlay}>
+                        <Button className="audio-play-button" variant="contained" color="secondary" onClick={togglePlay}>
                             {isPlaying ? 'Pause' : 'Play'}
                         </Button>
-                        <Button variant="contained" color="secondary" onClick={resetAudio}>
+                        <Button className="audio-reset-button" variant="contained" color="secondary" onClick={resetAudio}>
                             Reset
                         </Button>
                         <input className="audio-slider"

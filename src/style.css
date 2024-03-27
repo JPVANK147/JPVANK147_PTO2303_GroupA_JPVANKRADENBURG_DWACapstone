@@ -235,6 +235,14 @@ body {
     font-size: larger;
 }
 
+.audio-play-button {
+    left: 10px;
+}
+
+.audio-reset-button {
+    left: 10px;
+}
+
 input[type=range] {
     margin: 10px 0;
     width: 100%;
