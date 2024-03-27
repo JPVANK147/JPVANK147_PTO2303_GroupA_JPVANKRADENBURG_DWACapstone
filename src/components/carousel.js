@@ -72,7 +72,7 @@ const Carousel = ({ interval = 6000 }) => {
         };
     }, [interval, nextSlide]);
 
-    // Function to handle click, to navigate to the View.js page
+    // Event handler to handle the navigate to the View.js page
     const handleCarouselClick = (id) => {
         navigate(`/view/${id}`)
     };

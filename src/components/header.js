@@ -7,7 +7,7 @@ function Header() {
     // Hook for navigation
     const navigate = useNavigate();
 
-    // Function to handle navigation to the Favourites page
+    // Event handler to navigate to the Favourites page
     const handelFavouritesPage = () => {
         navigate("/favourite")
     };

@@ -19,7 +19,7 @@ function Favourite() {
         setFavourites(storedFavourites);
     }, []);
 
-    // Function to navigate back to home page
+    // Event handler to navigate back to home page
     const handleGoBackToHomeClick = () => {
         navigate("/")
     };
