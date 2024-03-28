@@ -52,9 +52,16 @@ function View() {
 
     }, [id]);
 
-    // Function to navigate back to home page
+    // Function to navigate back to home page, if audio is play or not
     const handleBackButtonClick = () => {
-        navigate("/");
+        if (selectedEpisode && isOverlayOpen) {
+            const confirmationMessage = window.confirm("Audio is playing. Are you sure you want to go back?")
+            if (confirmationMessage) {
+                navigate("/")
+            }
+        } else {
+            navigate("/");
+        }
     };
 
     // Event handler for season change
@@ -106,7 +113,7 @@ function View() {
         setIsOverlayOpen(true);
     };
 
-    // If the data is still loading, show loading message
+    // If the data is still loading, show loading ring
     if (loading) return (
         <div className="loader-ring"></div>
     );
@@ -122,32 +129,30 @@ function View() {
                     <img className="view-img" src={viewData.image} alt="podcast-cover" />
                     <h1>{viewData.title}</h1>
                     <h3>{viewData.description}</h3>
-                    <h3>{viewData.genres && viewData.genres.join(', ')}</h3>
+                    <h3 className="carousel-genre">{viewData.genres && viewData.genres.join(', ')}</h3>
                 </>
             )}
-            <div className="view-dropdown-container">
-                <div>
-                    <Box sx={{ minWidth: 320, margin: "20px", }}>
-                        <FormControl fullWidth>
-                            <InputLabel id="season">Season:</InputLabel>
-                            <Select
-                                labelId="season"
-                                id="season"
-                                label="Season"
-                                color="secondary"
-                                value={selectedSeason}
-                                onChange={handleSeasonChange}
-                            >
-                                <MenuItem value="select-season">Select a Season</MenuItem>
-                                {viewData.seasons && viewData.seasons.map((season, index) => (
-                                    <MenuItem key={index} value={season.title}>
-                                        {season.title}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </Box>
-                </div>
+            <div>
+                <Box sx={{ minWidth: 320, margin: "20px", }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="season">Season:</InputLabel>
+                        <Select
+                            labelId="season"
+                            id="season"
+                            label="Season"
+                            color="secondary"
+                            value={selectedSeason}
+                            onChange={handleSeasonChange}
+                        >
+                            <MenuItem value="select-season">Select a Season</MenuItem>
+                            {viewData.seasons && viewData.seasons.map((season, index) => (
+                                <MenuItem key={index} value={season.title}>
+                                    {season.title}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </Box>
             </div>
             {selectedSeason && viewData.seasons && (
                 <div>
@@ -160,12 +165,12 @@ function View() {
                             <h3>Description:</h3>
                             <p>{episode.description}</p>
                             <Box>
-                                <Button className="view-favourite-button" variant="contained" color="secondary" onClick={() => handleAudioPlayerClickButton(episode)}>
-                                    Audio
+                                <Button variant="contained" color="secondary" onClick={() => handleAudioPlayerClickButton(episode)}>
+                                    Audioplayer
                                 </Button>
                             </Box>
                             <Box sx={{ margin: "15px" }}>
-                                <Button className="view-favourite-button" variant="contained" color="secondary" onClick={() => handleAddToFavourites(episode)} >
+                                <Button variant="contained" color="secondary" onClick={() => handleAddToFavourites(episode)} >
                                     Add to Favourites
                                 </Button>
                             </Box>

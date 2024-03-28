@@ -29,18 +29,18 @@ function AudioPlayer({ isOpen, onClose, viewData, episode }) {
         };
 
         // Event handler for updating duration on metadata load
-        const handleLoadedMetadata = () => {
+        const handleLoadeddata = () => {
             setDuration(audio.duration);
         };
 
         // Add event listeners
         audio.addEventListener('timeupdate', handleTimeUpdate);
-        audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+        audio.addEventListener('loadeddata', handleLoadeddata);
 
         // Remove event listeners
         return () => {
             audio.removeEventListener('timeupdate', handleTimeUpdate);
-            audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+            audio.removeEventListener('loadeddata', handleLoadeddata);
         };
 
     }, [audioRef]);
@@ -86,12 +86,10 @@ function AudioPlayer({ isOpen, onClose, viewData, episode }) {
     // If isOpen is true, render the following
     return (
         <div className="audio-overlay">
-            <div />
             <div className="audio-overlay-container">
-                <div className="audio-overlay-controls">
-                </div>
+                <div className="audio-overlay-controls"></div>
                 <div>
-                    <h2>Title: {viewData.title}</h2>
+                    <h3>Title: {viewData.title}</h3>
                     <h3>Episode: {episode.episode}</h3>
                     <h3>Title of Episode: {episode.title}</h3>
                     <div className="audio-player">

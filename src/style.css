@@ -44,6 +44,7 @@ body {
     width: 275px;
     box-sizing: border-box;
     align-items: center;
+    text-align: center;
     border-radius: 10px;
     background-color: rgb(224, 218, 224);
 }
@@ -51,10 +52,6 @@ body {
 .show-image {
     margin: 1rem 1.6rem;
     height: 12.5rem;
-}
-
-.show-view-button {
-    left: 35%;
 }
 
 /*show*/
@@ -116,7 +113,7 @@ body {
     border: 5px solid rgb(224, 218, 224);
 }
 
-.go-back-shows {
+.back-to-shows {
     margin-left: auto;
 }
 
@@ -193,7 +190,7 @@ body {
 }
 
 .carousel-img:hover {
-    transform: scale(1.05);
+    transform: scale(1.15);
 }
 
 .carousel-content {
@@ -219,8 +216,7 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 10;
-    border: 5px solid black;
+    border-radius: 20px;
     color: white;
 }
 
@@ -267,7 +263,6 @@ input[type=range]::-moz-range-thumb {
 }
 
 /*Loading*/
-
 
 .loader-ring {
     position: fixed;

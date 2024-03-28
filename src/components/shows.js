@@ -112,6 +112,7 @@ function Shows() {
         navigate(`/view/${id}`)
     };
 
+    // If the data is still loading, show loading ring
     if (loading) return (
         <div className="loader-ring"></div>
     );
@@ -135,19 +136,17 @@ function Shows() {
         // Rendering each individual show
         return (
             <div key={index} className="show-grid-container">
-                <div className="show-border">
-                    <div>
-                        <img className="show-image" src={dataShow.image} alt="show-img" />
-                        <h3>Title: {dataShow.title}</h3>
-                        <h3>Description: {`${dataShow.description.substring(0, 75)}..`}</h3>
-                        <h3>Seasons: {dataShow.seasons}</h3>
-                        <h3>Genres: {genreMap}</h3>
-                        <h3>Updated: {updateDate(dataShow.updated)}</h3>
-                        <h3>Time: {updateTime(dataShow.updated)}</h3>
-                        <Button className="show-view-button" variant="contained" color="secondary" onClick={() => handleViewClick(dataShow.id)}>
-                            View
-                        </Button>
-                    </div>
+                <div>
+                    <img className="show-image" src={dataShow.image} alt="show-img" />
+                    <h3>{dataShow.title}</h3>
+                    <h3>{`${dataShow.description.substring(0, 75)}..`}</h3>
+                    <h3>Seasons: {dataShow.seasons}</h3>
+                    <h3 className="carousel-genre">Genres: {genreMap}</h3>
+                    <h3>Updated: {updateDate(dataShow.updated)}</h3>
+                    <h3>Time: {updateTime(dataShow.updated)}</h3>
+                    <Button variant="contained" color="secondary" onClick={() => handleViewClick(dataShow.id)}>
+                        View
+                    </Button>
                 </div>
             </div>
         );

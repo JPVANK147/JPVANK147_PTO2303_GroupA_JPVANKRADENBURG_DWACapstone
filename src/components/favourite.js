@@ -15,6 +15,12 @@ function Favourite() {
     // A State for the favourites
     const [favourites, setFavourites] = useState([]);
 
+    // A State for tracking if audio is playing or paused
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    // Reference to the audio element
+    const audioRef = React.createRef();
+
     // Fetch stored favourites from local storage
     useEffect(() => {
         const storedFavourites = JSON.parse(localStorage.getItem('favourites')) || [];
@@ -24,6 +30,17 @@ function Favourite() {
     // Event handler to navigate back to home page
     const handleGoBackToHomeClick = () => {
         navigate("/")
+    };
+
+    // Function to toggle play or pause
+    const togglePlay = () => {
+        if (isPlaying) {
+            audioRef.current.pause();
+        } else {
+            audioRef.current.play();
+        }
+
+        setIsPlaying(!isPlaying);
     };
 
     // Function to handle sorting favourites
@@ -157,7 +174,7 @@ function Favourite() {
                         </FormControl>
                     </Box>
                 </div>
-                <div className="go-back-shows">
+                <div className="back-to-shows">
                     <Button variant="contained" color="secondary" onClick={handleGoBackToHomeClick}>
                         Back to Shows
                     </Button>
@@ -166,26 +183,25 @@ function Favourite() {
             <div className="view-favourite-episode">
                 {favourites.map((favourite, index) => (
                     <div key={index}>
-                        <h1>Title:</h1>
-                        <h2>{favourite.title}</h2>
-                        <p>Description:</p>
-                        <p>{favourite.description}</p>
+                        <h1>{favourite.title}</h1>
+                        <h3>Description: {favourite.description}</h3>
                         {favourite.seasons && favourite.seasons.map((season, seasonIndex) => (
                             <div key={seasonIndex}>
                                 <h2>{season.title}</h2>
                                 {season.episodes && season.episodes.map((episode, episodeIndex) => (
                                     <div key={episodeIndex}>
-                                        <h2>Episode Title:</h2>
-                                        <h3>{episode.title}</h3>
-                                        <p>Episode Description:</p>
-                                        <p>{episode.description}</p>
-                                        <h3>Episode Number:</h3>
-                                        <h3>{episode.episode}</h3>
-                                        <h3>Add to Favourite:</h3>
-                                        <h3>{formattedDate()}</h3>
-                                        <audio className="view-audio" src={episode.file} controls />
+                                        <h2>Episode Title: {episode.title}</h2>
+                                        <h4>Episode Description: {episode.description}</h4>
+                                        <h3>Episode Number: {episode.episode}</h3>
+                                        <h3>Add to Favourite: {formattedDate()}</h3>
                                         <div>
-                                            <Button className="view-unfavourite-button" variant="contained" color="secondary" onClick={() => handleUnfavouriteClick(index, seasonIndex, episodeIndex)}>
+                                            <audio ref={audioRef} src={episode.file} />
+                                            <Button sx={{bottom: "5px"}} variant="contained" color="secondary" onClick={togglePlay}>
+                                                {isPlaying ? 'Pause' : 'Play'}
+                                            </Button>
+                                        </div>
+                                        <div>
+                                            <Button sx={{top: "2.5px"}} variant="contained" color="secondary" onClick={() => handleUnfavouriteClick(index, seasonIndex, episodeIndex)}>
                                                 Unfavourite
                                             </Button>
                                         </div>
