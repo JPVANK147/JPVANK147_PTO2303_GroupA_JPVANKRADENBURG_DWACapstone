@@ -166,7 +166,7 @@ function View() {
                             <p>{episode.description}</p>
                             <Box>
                                 <Button variant="contained" color="secondary" onClick={() => handleAudioPlayerClickButton(episode)}>
-                                    Audioplayer
+                                    Audio
                                 </Button>
                             </Box>
                             <Box sx={{ margin: "15px" }}>

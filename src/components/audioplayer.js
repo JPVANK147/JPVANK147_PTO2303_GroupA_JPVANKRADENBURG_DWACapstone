@@ -80,7 +80,19 @@ function AudioPlayer({ isOpen, onClose, viewData, episode }) {
         }
     };
 
-    // If isOpen prop is false, return null meaning don't render anything
+    // Event handler to close the audioplayer, if the Audio is playing or not
+    const handleCloseButton = () => {
+        if (isPlaying) {
+            const confirmationMessage = window.confirm("Audio is playing. Do you still want to go back?");
+            if (confirmationMessage) {
+                onClose();
+            }
+        } else {
+            onClose();
+        }
+    };
+
+    // If isOpen is false, return null meaning don't render anything
     if (!isOpen) return null;
 
     // If isOpen is true, render the following
@@ -110,7 +122,7 @@ function AudioPlayer({ isOpen, onClose, viewData, episode }) {
                         <span className="audio-time">{`${formatTime(currentTime)} / ${formatTime(duration)}`}</span>
                     </div>
                     <Box sx={{ margin: "20px" }}>
-                        <Button variant="contained" color="secondary" onClick={onClose}>
+                        <Button variant="contained" color="secondary" onClick={handleCloseButton}>
                             Close
                         </Button>
                     </Box>

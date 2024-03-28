@@ -14,7 +14,7 @@ const Carousel = ({ interval = 6000 }) => {
     // Hook for navigation
     const navigate = useNavigate();
 
-    // Fetch data from API 
+    // Fetch data from API shows
     useEffect(() => {
         const fetchData = async () => {
             try {
