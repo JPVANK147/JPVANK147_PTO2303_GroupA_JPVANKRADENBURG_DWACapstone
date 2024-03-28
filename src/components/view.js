@@ -55,9 +55,9 @@ function View() {
     // Function to navigate back to home page, if audio is play or not
     const handleBackButtonClick = () => {
         if (selectedEpisode && isOverlayOpen) {
-            const confirmationMessage = window.confirm("Audio is playing. Are you sure you want to go back?")
+            const confirmationMessage = window.confirm("Audioplayer is still open. Are you sure you want to go back?")
             if (confirmationMessage) {
-                navigate("/")
+                navigate("/");
             }
         } else {
             navigate("/");

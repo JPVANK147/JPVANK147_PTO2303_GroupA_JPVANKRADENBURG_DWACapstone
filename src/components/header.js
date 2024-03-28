@@ -9,7 +9,7 @@ function Header() {
 
     // Event handler to navigate to the Favourites page
     const handelFavouritesPage = () => {
-        navigate("/favourite")
+        navigate("/favourite");
     };
 
     // Rendering the Header component

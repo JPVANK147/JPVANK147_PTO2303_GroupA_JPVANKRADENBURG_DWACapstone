@@ -109,7 +109,7 @@ function Shows() {
 
     // Event handler for clicking on a show to view the shows details
     const handleViewClick = (id) => {
-        navigate(`/view/${id}`)
+        navigate(`/view/${id}`);
     };
 
     // If the data is still loading, show loading ring

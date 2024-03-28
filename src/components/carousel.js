@@ -74,7 +74,7 @@ const Carousel = ({ interval = 6000 }) => {
 
     // Event handler to handle the navigate to the View.js page
     const handleCarouselClick = (id) => {
-        navigate(`/view/${id}`)
+        navigate(`/view/${id}`);
     };
 
     // Rendering the carousel on the page

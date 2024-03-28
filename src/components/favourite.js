@@ -12,25 +12,37 @@ import Box from '@mui/material/Box';
 function Favourite() {
     // Hook for navigation
     const navigate = useNavigate();
+
     // A State for the favourites
     const [favourites, setFavourites] = useState([]);
 
     // A State for tracking if audio is playing or paused
     const [isPlaying, setIsPlaying] = useState(false);
 
+    // A State for loading status
+    const [loading, setLoading] = useState(true);
+
     // Reference to the audio element
     const audioRef = React.createRef();
 
     // Fetch stored favourites from local storage
     useEffect(() => {
-        const storedFavourites = JSON.parse(localStorage.getItem('favourites')) || [];
-        setFavourites(storedFavourites);
+        setTimeout(() => {
+            const storedFavourites = JSON.parse(localStorage.getItem('favourites')) || [];
+            setFavourites(storedFavourites);
+            setLoading(false);
+        }, 1000);
     }, []);
 
     // Event handler to navigate back to home page
     const handleGoBackToHomeClick = () => {
         navigate("/")
     };
+
+    // If the data is still loading, show loading ring
+    if (loading) return (
+        <div className="loader-ring"></div>
+    );
 
     // Function to toggle play or pause
     const togglePlay = () => {
@@ -196,12 +208,12 @@ function Favourite() {
                                         <h3>Add to Favourite: {formattedDate()}</h3>
                                         <div>
                                             <audio ref={audioRef} src={episode.file} />
-                                            <Button sx={{bottom: "5px"}} variant="contained" color="secondary" onClick={togglePlay}>
+                                            <Button sx={{ bottom: "5px" }} variant="contained" color="secondary" onClick={togglePlay}>
                                                 {isPlaying ? 'Pause' : 'Play'}
                                             </Button>
                                         </div>
                                         <div>
-                                            <Button sx={{top: "2.5px"}} variant="contained" color="secondary" onClick={() => handleUnfavouriteClick(index, seasonIndex, episodeIndex)}>
+                                            <Button sx={{ top: "2.5px" }} variant="contained" color="secondary" onClick={() => handleUnfavouriteClick(index, seasonIndex, episodeIndex)}>
                                                 Unfavourite
                                             </Button>
                                         </div>
