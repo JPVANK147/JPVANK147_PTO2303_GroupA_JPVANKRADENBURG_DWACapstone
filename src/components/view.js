@@ -52,7 +52,7 @@ function View() {
 
     }, [id]);
 
-    // Function to navigate back to home page, if audio is play or not
+    // Function to navigate back to home page, if audio is open
     const handleBackButtonClick = () => {
         if (selectedEpisode && isOverlayOpen) {
             const confirmationMessage = window.confirm("Audioplayer is still open. Are you sure you want to go back?")
@@ -125,12 +125,12 @@ function View() {
                 Back
             </Button>
             {viewData && (
-                <>
+                <div>
                     <img className="view-img" src={viewData.image} alt="podcast-cover" />
                     <h1>{viewData.title}</h1>
                     <h3>{viewData.description}</h3>
                     <h3 className="carousel-genre">{viewData.genres && viewData.genres.join(', ')}</h3>
-                </>
+                </div>
             )}
             <div>
                 <Box sx={{ minWidth: 320, margin: "20px", }}>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-// Function component named AudioPlayer which takes props as input
+// Function component named AudioPlayer
 function AudioPlayer({ isOpen, onClose, viewData, episode }) {
     // A State for tracking if audio is playing or paused
     const [isPlaying, setIsPlaying] = useState(false);

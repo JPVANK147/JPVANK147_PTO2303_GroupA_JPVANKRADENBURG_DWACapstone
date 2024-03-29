@@ -65,7 +65,7 @@ function Favourite() {
     // Function to handle searching for favourite titles
     const handleSearchFavouriteTitleChange = (event) => {
 
-        // Get the search query from the input field and convert it to lowercase
+        // Search query from the input field and convert it to lowercase
         const search = event.target.value.toLowerCase();
 
         // If the search query is empty, reset favourites to the stored favourites in local storage

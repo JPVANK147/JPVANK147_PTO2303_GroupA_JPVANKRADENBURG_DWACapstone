@@ -43,7 +43,7 @@ function Shows() {
     // Hook for navigation
     const navigate = useNavigate();
 
-    // Fetch the show data from API onto a component mount
+    // Fetch the show data from API
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -117,7 +117,6 @@ function Shows() {
         <div className="loader-ring"></div>
     );
 
-
     // Rendering the list of shows
     const listOfShows = handleShowSorting().map((dataShow, index) => {
         // Map genre IDs to their corresponding names
@@ -139,7 +138,7 @@ function Shows() {
                 <div>
                     <img className="show-image" src={dataShow.image} alt="show-img" />
                     <h3>{dataShow.title}</h3>
-                    <h3>{`${dataShow.description.substring(0, 75)}..`}</h3>
+                    <h3>{`${dataShow.description.substring(0, 75)}...`}</h3>
                     <h3>Seasons: {dataShow.seasons}</h3>
                     <h3 className="carousel-genre">Genres: {genreMap}</h3>
                     <h3>Updated: {updateDate(dataShow.updated)}</h3>
